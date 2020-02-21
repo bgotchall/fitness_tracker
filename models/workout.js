@@ -11,7 +11,7 @@ const workoutSchema = new Schema({
   exercises: [{
     type: {
       type: String,
-      enum: ['resistence', 'cardio']
+      enum: ['resistance', 'cardio']
     },
     name: {
       type:String,
@@ -35,6 +35,6 @@ const workoutSchema = new Schema({
   }]
 });
 
-const Workout = mongoose.model("Workout", workoutSchema);
+const Workout = mongoose.model("Workout", workoutSchema);  //mongoose pluralizes the collection name
 module.exports = Workout;
 
