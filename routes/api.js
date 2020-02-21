@@ -1,4 +1,5 @@
 const router = require("express").Router();
+var path = require("path");
 const Workout = require("../models/workout.js");
 
 router.post("/api/workouts", ({ body }, res) => {
@@ -52,7 +53,13 @@ router.get("/api/workouts", (req, res) => {
         });
 });
 
+//ordinary page routes here
+// router.get("/stats", function(req, res) {
+//     console.log("sending stats page");
+//     console.log(`path I am building is ${path.join(__dirname, "stats.html")}`)
+//     res.sendFile(path.join(__dirname, "stats.html"));
+//   });
 
-
+  
 
 module.exports = router;
