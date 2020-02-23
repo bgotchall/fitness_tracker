@@ -2,15 +2,45 @@ const router = require("express").Router();
 var path = require("path");
 const Workout = require("../models/workout.js");
 
-router.post("/api/workouts", ({ body }, res) => {
-    console.log(`attempting to post ${body}`)
-    Workout.create(body)
-        .then(dbWorkout => {
-            res.json(dbWorkout);
-        })
-        .catch(err => {
-            res.status(400).json(err);
-        });
+// router.post("/api/workouts", ({ body }, res) => {
+//     console.log(`attempting to post ${body}`)
+//     Workout.create(body)
+//         .then(dbWorkout => {
+//             res.json(dbWorkout);
+//         })
+//         .catch(err => {
+//             res.status(400).json(err);
+//         });
+// });
+
+
+router.post("/api/workouts", (req, res) => {
+    //console.log(`attempting to post ${JSON.stringify(req)}`)
+    console.log("posting");
+    Workout.create({})
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.send(err);
+      });
+});
+
+router.put("/api/workouts/:id", (req, res) => {
+    console.log(req.body, "put")
+    Workout.update(
+        {_id: req.params.id}, { $set: { exercises: req.body } },
+        
+        (error, data) => {
+            if (error) {
+              console.log(error);
+              res.send(error);
+            } else {
+              console.log(data);
+              res.send(data);
+            }
+          }
+    )
 });
 
 // router.post("/api/transaction/bulk", ({ body }, res) => {
@@ -57,6 +87,11 @@ router.get("/api/workouts", (req, res) => {
 router.get("/stats", function(req, res) {
     console.log("sending stats page");
     res.sendFile(path.join(__dirname, "..\\public\\stats.html"));
+  });
+
+  router.get("/exercise", function(req, res) {
+    console.log("sending excercise page");
+    res.sendFile(path.join(__dirname, "..\\public\\exercise.html"));
   });
 
   
