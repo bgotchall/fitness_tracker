@@ -32,7 +32,10 @@ const workoutSchema = new Schema({
       type:Number,
       min: [0, 'Enter a positive number']
     }
-  }]
+  }],
+  totalDuration:{
+    type:Number
+  }
 });
 
 const Workout = mongoose.model("Workout", workoutSchema);  //mongoose pluralizes the collection name
